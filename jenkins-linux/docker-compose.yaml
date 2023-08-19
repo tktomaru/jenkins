@@ -11,19 +11,20 @@ services:
       - TZ=Asia/Tokyo
       #- DISPLAY=":10.0"
     volumes:
+      # sshを保存
       - ./data/jenkins/ssh:/var/lib/jenkins/.ssh
-      #- ./data/jenkins/etc:/etc
+      # DockerでGUIを表示する
       - /tmp/.X11-unix:/tmp/.X11-unix # mount the X11 socket
-      #- /run/dbus:/run/dbus
+      # 共有メモリ
       - /dev/shm:/dev/shm
-      #- /usr:/vm/usr
+      # Jenkins内で使用する共有ソフト
       - ./data/tools:/tools
+      # Jenkisのデータを保存
       - ./data/jenkins/jenkins_home:/var/jenkins_home
+      # rootをマウント
       - ./data/jenkins/root:/root
       # ホストのdocker.sockをマウント
       - /var/run/docker.sock:/var/run/docker.sock
-    #devices:
-    #  - /dev/dri
     ports:
       # jenkins port
       - '36001:8080'
